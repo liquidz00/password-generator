@@ -50,8 +50,3 @@ while loop == 0:
             loop = 1
 
     # TODO: Set up extra constraints for password
-    # if (
-    #     any(char in special_chars for char in pwd)
-    #     and sum(char in digits for char in pwd) >= 2
-    # ):
-    #     break
