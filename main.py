@@ -9,10 +9,11 @@ loop = 0
 while loop == 0:
 
     # Define variables
-    letters = string.ascii_letters
+    uppercase_letters = string.ascii_letters.upper()
+    lowercase_letters = string.ascii_letters.lower()
     digits = string.digits
     special_chars = string.punctuation
-    alphabet = letters + digits + special_chars
+    alphabet = uppercase_letters + lowercase_letters + digits + special_chars
 
     # Define variable length based upon user input
     pwd_length = int(input("How many characters long? Choose 12 or 16: "))
