@@ -1,6 +1,7 @@
 # Import necessary frameworks
 import secrets
 import string
+import random
 
 # Create loop variable for while loop
 loop = 0
@@ -28,11 +29,15 @@ while loop == 0:
             print("Please enter either 12 or 16")
 
     # Define empty string
-    pwd = ""
+    temp_pwd = ""
 
     # Create for loop to add random choices from alphabet variable to password
     for char in range(pwd_length):
-        pwd += "".join(secrets.choice(alphabet))
+        temp_pwd += "".join(secrets.choice(alphabet))
+
+    list_shuffled = list(temp_pwd)
+    random.shuffle(list_shuffled)
+    pwd = "".join(list_shuffled)
 
     # Show user generated password
     print(pwd)
