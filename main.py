@@ -55,5 +55,3 @@ while loop == 0:
             loop = 0
         case "n":
             loop = 1
-
-    # TODO: Set up extra constraints for password
