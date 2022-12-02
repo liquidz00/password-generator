@@ -35,6 +35,7 @@ while loop == 0:
     for char in range(pwd_length):
         temp_pwd += "".join(secrets.choice(alphabet))
 
+    # Shuffle output to verify password does not fit a unique pattern
     list_shuffled = list(temp_pwd)
     random.shuffle(list_shuffled)
     pwd = "".join(list_shuffled)
