@@ -54,4 +54,5 @@ while loop == 0:
         case "y":
             loop = 0
         case "n":
+            print("Goodbye")
             loop = 1
