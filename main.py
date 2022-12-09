@@ -47,6 +47,7 @@ while True:
         case "y":
             True
         case "n":
-            False
+            print("Goodbye")
+            break
         case other:
             print("Please enter either Y or N")
