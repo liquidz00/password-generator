@@ -1,9 +1,30 @@
 # Import necessary frameworks
 from shuffler import shuffle
 from generator import generate
+import PySimpleGUI as sg
+
 
 # Create main function
 def main():
+    # Show user window
+    sg.theme("Reddit")
+    titlebar = sg.Titlebar("Password Generator")
+
+    layout = [
+        [sg.Text("How many characters long? Choose 12 or 16")],
+        [sg.Checkbox("12", default=True)],
+        [sg.Checkbox("16")],
+        [sg.InputText(key="pwd")],
+        [sg.Button("Generate"), sg.Button("Clear"), sg.Exit()],
+    ]
+
+    window = sg.Window(titlebar, layout)
+
+    def clear():
+        for key in values:
+            window[key]("")
+        return None
+
     # Create a password using generate function
     pwd = generate()
 
