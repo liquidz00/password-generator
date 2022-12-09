@@ -42,6 +42,11 @@ def main():
 while True:
     main()
     # Restart process or end
-    if input("Generate another password? (Y/N) ").strip().upper() != "Y":
-        print("Goodbye")
-        break
+    response = input("Generate another password? (Y/N) ").strip().lower()
+    match response:
+        case "y":
+            True
+        case "n":
+            False
+        case other:
+            print("Please enter either Y or N")
