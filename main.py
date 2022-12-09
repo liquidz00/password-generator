@@ -34,9 +34,6 @@ def main():
 
     # Shuffle output to verify password does not fit a unique pattern
     shuffle(pwd)
-    # list_shuffled = list(temp_pwd)
-    # random.shuffle(list_shuffled)
-    # pwd = "".join(list_shuffled)
 
     # Show user generated password
     print(pwd)
