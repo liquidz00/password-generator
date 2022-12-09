@@ -1,7 +1,6 @@
 # Import necessary frameworks
 import secrets
 import string
-import random
 from shuffler import shuffle
 
 # Create main function
