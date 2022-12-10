@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from main import main
 
 
-def gui():
+def window():
     # Show user window
     sg.theme("Reddit")
     titlebar = sg.Titlebar("Password Generator")
@@ -20,5 +20,5 @@ def gui():
 
 def clear_input():
     for key in main.values:
-        gui.window[key]("")
+        window.window[key]("")
     return None
