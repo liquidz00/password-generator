@@ -9,8 +9,8 @@ def gui():
 
     layout = [
         [sg.Text("How many characters long? Choose 12 or 16")],
-        [sg.Checkbox("12", default=True)],
-        [sg.Checkbox("16")],
+        [sg.Checkbox("12", default=False, enable_events=True, key="12 pwd")],
+        [sg.Checkbox("16", default=False, enable_events=True, key="16 pwd")],
         [sg.InputText(key="pwd")],
         [sg.Button("Generate"), sg.Button("Clear"), sg.Exit()],
     ]
