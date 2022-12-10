@@ -3,7 +3,6 @@ from shuffler import shuffle
 from generator import generate
 import PySimpleGUI as sg
 
-
 # Create main function
 def main():
     # Show user window
@@ -20,7 +19,7 @@ def main():
 
     window = sg.Window(titlebar, layout)
 
-    def clear():
+    def clear_input():
         for key in values:
             window[key]("")
         return None
@@ -37,13 +36,22 @@ def main():
 
 while True:
     main()
-    # Restart process or end
-    response = input("Generate another password? (Y/N) ").strip().lower()
-    match response:
-        case "y":
-            True
-        case "n":
-            print("Goodbye")
-            break
-        case other:
-            print("Please enter either Y or N")
+    event, values = main.window.read()
+    if event == sg.WIN_CLOSED or event == "Exit":
+        main.window.close()
+        break
+    if event == "Clear":
+        main.clear_input()
+    if event == "Generate":
+        generate()
+        shuffle()
+
+    # response = input("Generate another password? (Y/N) ").strip().lower()
+    # match response:
+    #     case "y":
+    #         True
+    #     case "n":
+    #         print("Goodbye")
+    #         break
+    #     case other:
+    #         print("Please enter either Y or N")
