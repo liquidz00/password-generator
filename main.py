@@ -3,6 +3,7 @@ from shuffler import shuffle
 from generator import generate
 from gui import gui, clear_input
 
+
 # Create main function
 def main():
     # Create a password using generate function
@@ -17,12 +18,12 @@ def main():
 
 while True:
     main()
-    event, values = main.window.read()
-    if event == sg.WIN_CLOSED or event == "Exit":
-        main.window.close()
+    event, values = gui.window.read()
+    if event == gui.sg.WIN_CLOSED or event == "Exit":
+        gui.window.close()
         break
     if event == "Clear":
-        main.clear_input()
+        gui.clear_input()
     if event == "Generate":
         generate()
         shuffle()
