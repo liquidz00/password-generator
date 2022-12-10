@@ -1,7 +1,7 @@
 # Import necessary frameworks
 from shuffler import shuffle
 from generator import generate
-from gui import gui, clear_input
+from gui import window, clear_input
 
 
 # Create main function
@@ -18,12 +18,12 @@ def main():
 
 while True:
     main()
-    event, values = gui.window.read()
-    if event == gui.sg.WIN_CLOSED or event == "Exit":
-        gui.window.close()
+    event, values = window.window.read()
+    if event == window.sg.WIN_CLOSED or event == "Exit":
+        window.window.close()
         break
     if event == "Clear":
-        gui.clear_input()
+        window.window.clear_input()
     if event == "Generate":
         generate()
         shuffle()
