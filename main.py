@@ -23,6 +23,7 @@ while True:
         window.window.close()
         break
     if event == "Clear":
+        print("information cleared")
         window.window.clear_input()
     if event == "Generate":
         generate()
