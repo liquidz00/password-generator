@@ -1,28 +1,8 @@
 # Import necessary frameworks
-# import _functions as pwdf
-import PySimpleGUI as sg
+import tkinter as tk
 import string
 import secrets
 import random
-
-
-# Show user window
-sg.theme("Reddit")
-titlebar = sg.Titlebar("Password Generator")
-
-layout = [
-    [sg.Text("How many characters long? Choose 12 or 16")],
-    [sg.Checkbox("12", default=False, enable_events=True, key="__12pwd__")],
-    [sg.Checkbox("16", default=False, enable_events=True, key="__16pwd__")],
-    [sg.InputText(key="__PWD__")],
-    [
-        sg.Button("Generate", enable_events=True, key="Generate"),
-        sg.Button("Clear"),
-        sg.Exit(),
-    ],
-]
-
-window = sg.Window(titlebar, layout)
 
 
 def generate_password():
@@ -68,22 +48,34 @@ def shuffle(pwd=None):
 
 
 def clear_input():
-    for key in values:
-        window[key]("")
-    return None
+    pwdLabel.config(text="")
 
 
-while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == "Exit":
-        break
-    if event == "Clear":
-        print("information cleared")
-        clear_input()
-    if event == "Generate":
-        pwd = generate_password()
-        shuffle(pwd)
-        window.update(values[pwd])
+def exit():
+    root.destroy()
 
 
-window.close()
+# Set up Application GUI
+root = tk.Tk()
+root.title("Password Generator")
+
+# Create checkboxes
+chVar12 = tk.IntVar()
+check12 = tk.Checkbutton(root, text="12", variable=chVar12)
+check12.grid(row=0, column=0, sticky=tk.W)
+
+chVar16 = tk.IntVar()
+check16 = tk.Checkbutton(root, text="16", variable=chVar16)
+check16.grid(row=1, column=0, sticky=tk.W)
+
+# Create generated password label
+pwdLabel = tk.Label(root)
+pwdLabel.grid(row=2, column=0, sticky=tk.W)
+
+# Create generate button
+buttonGenerate = tk.Button(root, text="Generate", command=generate_password)
+buttonGenerate.grid(row=3, column=0, sticky=tk.W)
+
+# Create clear button
+buttonClear = tk.Button(root, text="Clear", command=clear_input)
+buttonClear.grid(row=3, column=1, sticky=tk.W)
