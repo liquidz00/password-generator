@@ -51,6 +51,13 @@ def shuffle(pwd=None):
     return pwd
 
 
+def check_fields():
+    if chVar12.get() != 1 and chVar16.get() != 1:
+        return False
+    else:
+        return True
+
+
 # Generate a password
 def generate_password():
     # Define variables
@@ -63,12 +70,12 @@ def generate_password():
     # Define variable length based upon user input
     pwd_length = 0
 
-    if chVar12.get() == 1:
+    if check_fields() == False:
+        pwdLabel.config(text="Select a checkbox.")
+    elif chVar12.get() == 1:
         pwd_length = 12
     elif chVar16.get() == 1:
         pwd_length = 16
-    elif chVar12.get() == 0 and chVar16.get() == 0:
-        pwdLabel.config(text="Please select either 12 or 16")
 
     # Define empty string
     pwd = ""
@@ -76,10 +83,8 @@ def generate_password():
     # Create for loop to add random choices from alphabet variable to password
     for char in range(pwd_length):
         pwd += "".join(secrets.choice(alphabet))
-
-    shuffle(pwd=pwd)
-
-    pwdLabel.config(text=pwd)
+        shuffle(pwd=pwd)
+        pwdLabel.config(text=pwd)
 
 
 # Create generate button
