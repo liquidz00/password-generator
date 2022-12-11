@@ -4,13 +4,6 @@ import string
 import secrets
 import random
 
-# Define button functions clear and exit
-
-
-def exit():
-    root.destroy()
-
-
 # Set up Application GUI
 root = tk.Tk()
 root.title("Password Generator")
@@ -38,6 +31,11 @@ def clear_input():
 # Create clear button
 buttonClear = tk.Button(root, text="Clear", command=clear_input)
 buttonClear.grid(row=3, column=1, sticky=tk.W)
+
+# Define button function exit
+def exit():
+    root.destroy()
+
 
 # Create exit button
 buttonExit = tk.Button(root, text="Exit", command=exit)
