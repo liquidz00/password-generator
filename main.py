@@ -32,7 +32,7 @@ def clear_input():
 
 # Create clear button
 buttonClear = tk.Button(root, text="Clear", command=clear_input)
-buttonClear.grid(row=3, column=1, sticky=tk.W)
+buttonClear.grid(row=3, column=1, sticky=tk.EW)
 
 # Define button function exit
 def exit():
@@ -41,7 +41,7 @@ def exit():
 
 # Create exit button
 buttonExit = tk.Button(root, text="Exit", command=exit)
-buttonExit.grid(row=3, column=2, sticky=tk.W)
+buttonExit.grid(row=3, column=2, sticky=tk.EW)
 
 # Shuffle password to make even more random
 def shuffle(pwd=None):
@@ -51,6 +51,7 @@ def shuffle(pwd=None):
     return pwd
 
 
+# TODO: Ensure both checkboxes are NOT checked (radio button)
 def check_fields():
     if chVar12.get() != 1 and chVar16.get() != 1:
         return False
@@ -80,6 +81,7 @@ def generate_password():
     # Define empty string
     pwd = ""
 
+    # TODO: Password automatically copies to clipboard with pyperclip
     # Create for loop to add random choices from alphabet variable to password
     for char in range(pwd_length):
         pwd += "".join(secrets.choice(alphabet))
@@ -89,7 +91,7 @@ def generate_password():
 
 # Create generate button
 buttonGenerate = tk.Button(root, text="Generate", command=generate_password, width=10)
-buttonGenerate.grid(row=3, column=0, padx=10, pady=5, sticky=tk.W)
+buttonGenerate.grid(row=3, column=0, padx=10, pady=5, sticky=tk.NSEW)
 
 
 root.mainloop()
