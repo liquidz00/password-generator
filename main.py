@@ -110,12 +110,15 @@ buttonGenerate.grid(row=2, column=0, sticky=tk.NSEW)
 # Create copy function
 def copy():
     # Get input of entry box which is displaying password
-    entry = pwdEntry.get()
-    pc.copy(entry)
-    top = tk.Toplevel(root)
-    top.geometry("200x50")
-    top.title("Password copied")
-    tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+    if pwdEntry.get() != "":
+        entry = pwdEntry.get()
+        pc.copy(entry)
+        top = tk.Toplevel(root)
+        top.geometry("200x50")
+        top.title("Password copied")
+        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+    else:
+        buttonCopy.config(state="disabled")
 
 
 # Create copy button
