@@ -25,10 +25,7 @@ check16 = tk.Checkbutton(pwdLabelFrame, text="16", variable=chVar16)
 check16.grid(row=0, column=1, padx=10, sticky=tk.W)
 
 # Create generated password label
-pwdEntry = tk.Entry(
-    root, font=("Menlo", 12), state="normal", width=100, justify="center"
-)
-# pwdEntry.grid(row=2, column=0, padx=10, sticky=tk.W)
+pwdEntry = tk.Entry(root, font=("Menlo", 12), width=100, justify="center")
 pwdEntry.pack(pady=10, padx=20)
 
 # Create buttons frame
@@ -63,9 +60,11 @@ def shuffle(pwd=None):
     return pwd
 
 
-# TODO: Ensure both checkboxes are NOT checked (radio button)
+# Ensure both checkboxes are NOT checked (radio button)
 def check_fields():
     if chVar12.get() != 1 and chVar16.get() != 1:
+        return True
+    elif chVar12.get() == 1 and chVar16.get() == 1:
         return True
     else:
         return False
@@ -117,7 +116,6 @@ buttonGenerate.grid(row=2, column=0, sticky=tk.NSEW)
 def copy():
     # Get input of entry box which is displaying password
     if pwdEntry.get() != "":
-        buttonCopy.config(state="normal")
         entry = pwdEntry.get()
         pc.copy(entry)
         top = tk.Toplevel(root)
@@ -132,5 +130,10 @@ def copy():
 copyImage = tk.PhotoImage(file="copy-image.png")
 buttonCopy = tk.Button(buttonFrame, image=copyImage, command=copy)
 buttonCopy.grid(row=2, column=1, sticky=tk.NSEW)
+
+# TODO: Create function to disable/enable buttons
+def buttonState(*args):
+    pass
+
 
 root.mainloop()
