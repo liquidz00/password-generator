@@ -112,10 +112,15 @@ def copy():
     # Get input of entry box which is displaying password
     entry = pwdEntry.get()
     pc.copy(entry)
+    top = tk.Toplevel(root)
+    top.geometry("200x50")
+    top.title("Password copied")
+    tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
 
 
 # Create copy button
-buttonCopy = tk.Button(buttonFrame, text="Copy", command=copy)
+copyImage = tk.PhotoImage(file="copy-image.png")
+buttonCopy = tk.Button(buttonFrame, image=copyImage, command=copy)
 buttonCopy.grid(row=2, column=1, sticky=tk.NSEW)
 
 root.mainloop()
