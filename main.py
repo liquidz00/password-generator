@@ -73,6 +73,11 @@ def check_fields():
 
 # Generate a password
 def generate_password():
+
+    # Clear password entry if string is present
+    if pwdEntry.get() != "":
+        pwdEntry.delete(0, tk.END)
+
     # Define variables
     uppercase_letters = string.ascii_letters.upper()
     lowercase_letters = string.ascii_letters.lower()
@@ -98,6 +103,7 @@ def generate_password():
         pwd += "".join(secrets.choice(alphabet))
         shuffle(pwd=pwd)
 
+    # Insert generated password into text entry
     pwdEntry.insert(0, pwd)
 
 
@@ -111,6 +117,7 @@ buttonGenerate.grid(row=2, column=0, sticky=tk.NSEW)
 def copy():
     # Get input of entry box which is displaying password
     if pwdEntry.get() != "":
+        buttonCopy.config(state="normal")
         entry = pwdEntry.get()
         pc.copy(entry)
         top = tk.Toplevel(root)
