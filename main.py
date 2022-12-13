@@ -12,8 +12,8 @@ root.geometry("300x160")
 root.resizable(False, False)
 
 # Create frames (Password Length radio buttons, and generate, clear, and exit buttons)
-pwdLabelFrame = tk.LabelFrame(text="Choose a password length:", bd=1, width=100)
-pwdLabelFrame.pack(pady=10)
+pwdLabelFrame = tk.LabelFrame(text="Choose a password length:", bd=1, width=50)
+pwdLabelFrame.pack(pady=10, padx=15, fill="x")
 
 # Create checkboxes
 chVar12 = tk.IntVar()
@@ -25,8 +25,11 @@ check16 = tk.Checkbutton(pwdLabelFrame, text="16", variable=chVar16)
 check16.grid(row=0, column=1, padx=10, sticky=tk.W)
 
 # Create generated password label
-pwdEntry = tk.Entry(root, font=("Menlo", 12), width=100, justify="center")
-pwdEntry.pack(pady=10, padx=20)
+entryVar = tk.StringVar()
+pwdEntry = tk.Entry(
+    root, font=("Menlo", 12), width=100, justify="center", textvariable=entryVar
+)
+pwdEntry.pack(pady=10, padx=10, fill="x")
 
 # Create buttons frame
 buttonFrame = tk.Frame(root)
@@ -37,6 +40,7 @@ def clear_input():
     pwdEntry.delete(0, tk.END)
     chVar12.set(0)
     chVar16.set(0)
+    buttonState()
 
 
 # Create clear button
@@ -65,7 +69,7 @@ def check_fields():
     if chVar12.get() != 1 and chVar16.get() != 1:
         return True
     elif chVar12.get() == 1 and chVar16.get() == 1:
-        return True
+        return None
     else:
         return False
 
@@ -89,6 +93,8 @@ def generate_password():
 
     if check_fields() == True:
         pwdEntry.insert(index=0, string="Select a password length.")
+    elif check_fields() == None:
+        pwdEntry.insert(index=0, string="Error: both lengths selected.")
     elif chVar12.get() == 1:
         pwd_length = 12
     elif chVar16.get() == 1:
@@ -104,6 +110,7 @@ def generate_password():
 
     # Insert generated password into text entry
     pwdEntry.insert(0, pwd)
+    buttonState()
 
 
 # Create generate button
@@ -128,12 +135,15 @@ def copy():
 
 # Create copy button
 copyImage = tk.PhotoImage(file="copy-image.png")
-buttonCopy = tk.Button(buttonFrame, image=copyImage, command=copy)
+buttonCopy = tk.Button(buttonFrame, image=copyImage, command=copy, state="disabled")
 buttonCopy.grid(row=2, column=1, sticky=tk.NSEW)
 
 # TODO: Create function to disable/enable buttons
 def buttonState(*args):
-    pass
+    if entryVar.get() != "":
+        buttonCopy.config(state="normal")
+    else:
+        buttonCopy.config(state="disabled")
 
 
 root.mainloop()
