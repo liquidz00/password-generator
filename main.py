@@ -11,19 +11,25 @@ root.title("Password Generator")
 root.geometry("350x200")
 root.resizable(False, False)
 
+root.grid_rowconfigure(1, weight=1)
+root.grid_columnconfigure(0, weight=1)
+
 # ** Create all frames (pwdLabel, middleFrame, buttonFrame) **
 
 # pwdLabelFrame
-pwdLabelFrame = tk.LabelFrame(text="Choose a password length:", bd=1, width=50)
-pwdLabelFrame.pack(pady=10, padx=15, fill="x")
+pwdLabelFrame = tk.LabelFrame(root, text="Choose a password length:", bd=1)
+# pwdLabelFrame.pack(pady=10, padx=15, fill="x")
+pwdLabelFrame.grid(row=0, column=0, pady=10, padx=15, sticky=tk.NSEW)
 
 # middleFrame
 middleFrame = tk.Frame(root, relief="flat")
-middleFrame.pack(pady=10, padx=15, fill="x")
+# middleFrame.pack(pady=10, padx=15, fill="x")
+middleFrame.grid(row=1, column=0, pady=10, padx=15, sticky=tk.NSEW)
 
 # buttonFrame
 buttonFrame = tk.Frame(root)
-buttonFrame.pack(pady=10, padx=15, fill="x")
+# buttonFrame.pack(pady=10, padx=15, fill="x")
+
 
 # ** Create widgets for top frame **
 chVar12 = tk.IntVar()
@@ -46,33 +52,33 @@ errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bol
 errorLabel.grid(row=1, column=0, sticky=tk.W)
 
 # Copy function
-def copy():
-    # Get input of entry box which is displaying password
-    if pwdEntry.get() != "":
-        entry = pwdEntry.get()
-        pc.copy(entry)
-        top = tk.Toplevel(root)
-        top.geometry("200x100")
-        top.title("Password copied")
-        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
-        topClearB = tk.Button(
-            top, text="Clear", command=lambda: [clear_input(), top.destroy()]
-        )
-        topClearB.pack(pady=5)
+# def copy():
+#     # Get input of entry box which is displaying password
+#     if pwdEntry.get() != "":
+#         entry = pwdEntry.get()
+#         pc.copy(entry)
+#         top = tk.Toplevel(root)
+#         top.geometry("200x100")
+#         top.title("Password copied")
+#         tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+#         topClearB = tk.Button(
+#             top, text="Clear", command=lambda: [clear_input(), top.destroy()]
+#         )
+#         topClearB.pack(pady=5)
 
-    else:
-        buttonCopy.config(state="disabled")
+#     else:
+#         buttonCopy.config(state="disabled")
 
 
-# Create copy button
-copyImage = tk.PhotoImage(file="copy-30.png")
-buttonCopy = tk.Button(
-    middleFrame,
-    image=copyImage,
-    command=copy(),
-    state="disabled",
-)
-buttonCopy.grid(row=0, column=0)
+# # Create copy button
+# copyImage = tk.PhotoImage(file="copy-30.png")
+# buttonCopy = tk.Button(
+#     middleFrame,
+#     image=copyImage,
+#     command=copy(),
+#     state="disabled",
+# )
+# buttonCopy.grid(row=0, column=0)
 
 
 # ** Create widgets for bottom frame **
