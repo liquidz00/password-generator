@@ -8,14 +8,24 @@ import pyperclip as pc
 # Set up Application GUI
 root = tk.Tk()
 root.title("Password Generator")
-root.geometry("300x160")
+root.geometry("350x200")
 root.resizable(False, False)
 
-# Create frames (Password Length radio buttons, and generate, clear, and exit buttons)
+# ** Create all frames (pwdLabel, middleFrame, buttonFrame) **
+
+# pwdLabelFrame
 pwdLabelFrame = tk.LabelFrame(text="Choose a password length:", bd=1, width=50)
 pwdLabelFrame.pack(pady=10, padx=15, fill="x")
 
-# Create checkboxes
+# middleFrame
+middleFrame = tk.Frame(root, relief="flat")
+middleFrame.pack(pady=10, padx=15, fill="x")
+
+# buttonFrame
+buttonFrame = tk.Frame(root)
+buttonFrame.pack(pady=10, padx=15, fill="x")
+
+# ** Create widgets for top frame **
 chVar12 = tk.IntVar()
 check12 = tk.Checkbutton(pwdLabelFrame, text="12", variable=chVar12)
 check12.grid(row=0, column=0, padx=10, sticky=tk.W)
@@ -24,37 +34,120 @@ chVar16 = tk.IntVar()
 check16 = tk.Checkbutton(pwdLabelFrame, text="16", variable=chVar16)
 check16.grid(row=0, column=1, padx=10, sticky=tk.W)
 
-# Create generated password label
+# ** Create widgets for middleFrame **
 entryVar = tk.StringVar()
 pwdEntry = tk.Entry(
-    root, font=("Menlo", 12), width=100, justify="center", textvariable=entryVar
+    middleFrame, font=("Menlo", 12), justify="left", textvariable=entryVar
 )
-pwdEntry.pack(pady=10, padx=10, fill="x")
+pwdEntry.grid(row=0, column=0, sticky=tk.W)
 
-# Create buttons frame
-buttonFrame = tk.Frame(root)
-buttonFrame.pack(pady=10)
+# Create error label
+errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bold", 10))
+errorLabel.grid(row=1, column=0, sticky=tk.W)
+
+# Copy function
+def copy():
+    # Get input of entry box which is displaying password
+    if pwdEntry.get() != "":
+        entry = pwdEntry.get()
+        pc.copy(entry)
+        top = tk.Toplevel(root)
+        top.geometry("200x100")
+        top.title("Password copied")
+        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+        topClearB = tk.Button(
+            top, text="Clear", command=lambda: [clear_input(), top.destroy()]
+        )
+        topClearB.pack(pady=5)
+
+    else:
+        buttonCopy.config(state="disabled")
+
+
+# Create copy button
+copyImage = tk.PhotoImage(file="copy-30.png")
+buttonCopy = tk.Button(
+    middleFrame,
+    image=copyImage,
+    command=copy(),
+    state="disabled",
+)
+buttonCopy.grid(row=0, column=0)
+
+
+# ** Create widgets for bottom frame **
 
 # Define button function clear_input()
 def clear_input():
     pwdEntry.delete(0, tk.END)
     chVar12.set(0)
     chVar16.set(0)
+    errorLabel.config(text="")
     buttonState()
 
 
 # Create clear button
 buttonClear = tk.Button(buttonFrame, text="Clear", command=clear_input)
-buttonClear.grid(row=2, column=2, sticky=tk.EW)
+buttonClear.grid(row=2, column=1, sticky=tk.EW)
 
-# Define button function exit
+# Define exit function
 def exit():
     root.destroy()
 
 
 # Create exit button
 buttonExit = tk.Button(buttonFrame, text="Exit", command=exit)
-buttonExit.grid(row=2, column=3, sticky=tk.EW)
+buttonExit.grid(row=2, column=0, sticky=tk.EW)
+
+# Create generate function
+def generate_password():
+
+    # Clear password entry if string is present
+    if pwdEntry.get() != "":
+        pwdEntry.delete(0, tk.END)
+        errorLabel.config(text="")
+
+    # Define variables
+    uppercase_letters = string.ascii_letters.upper()
+    lowercase_letters = string.ascii_letters.lower()
+    digits = string.digits
+    special_chars = string.punctuation
+    alphabet = uppercase_letters + lowercase_letters + digits + special_chars
+
+    # Define variable length based upon user input
+    pwd_length = 0
+
+    if check_fields() == True:
+        errorLabel.config(text="Select a password length.")
+    elif check_fields() == None:
+        errorLabel.config(text="Error: both lengths selected.")
+    elif chVar12.get() == 1:
+        pwd_length = 12
+        errorLabel.config(text="")
+    elif chVar16.get() == 1:
+        pwd_length = 16
+        errorLabel.config(text="")
+
+    # Define empty string
+    pwd = ""
+
+    # Create for loop to add random choices from alphabet variable to password
+    for i in range(pwd_length):
+        pwd += "".join(secrets.choice(alphabet))
+        shuffle(pwd=pwd)
+
+    # Insert generated password into text entry
+    pwdEntry.insert(0, pwd)
+    buttonState()
+
+
+# Create generate button
+buttonGenerate = tk.Button(
+    buttonFrame, text="Generate", command=generate_password, width=15
+)
+buttonGenerate.grid(row=2, column=2, columnspan=2, sticky=tk.E)
+
+# ** Additional Functions **
 
 # Shuffle password to make even more random
 def shuffle(pwd=None):
@@ -74,74 +167,7 @@ def check_fields():
         return False
 
 
-# Generate a password
-def generate_password():
-
-    # Clear password entry if string is present
-    if pwdEntry.get() != "":
-        pwdEntry.delete(0, tk.END)
-
-    # Define variables
-    uppercase_letters = string.ascii_letters.upper()
-    lowercase_letters = string.ascii_letters.lower()
-    digits = string.digits
-    special_chars = string.punctuation
-    alphabet = uppercase_letters + lowercase_letters + digits + special_chars
-
-    # Define variable length based upon user input
-    pwd_length = 0
-
-    if check_fields() == True:
-        pwdEntry.insert(index=0, string="Select a password length.")
-    elif check_fields() == None:
-        pwdEntry.insert(index=0, string="Error: both lengths selected.")
-    elif chVar12.get() == 1:
-        pwd_length = 12
-    elif chVar16.get() == 1:
-        pwd_length = 16
-
-    # Define empty string
-    pwd = ""
-
-    # Create for loop to add random choices from alphabet variable to password
-    for i in range(pwd_length):
-        pwd += "".join(secrets.choice(alphabet))
-        shuffle(pwd=pwd)
-
-    # Insert generated password into text entry
-    pwdEntry.insert(0, pwd)
-    buttonState()
-
-
-# Create generate button
-buttonGenerate = tk.Button(
-    buttonFrame, text="Generate", command=generate_password, width=10
-)
-buttonGenerate.grid(row=2, column=0, sticky=tk.NSEW)
-
-# Create copy function
-def copy():
-    # Get input of entry box which is displaying password
-    if pwdEntry.get() != "":
-        entry = pwdEntry.get()
-        pc.copy(entry)
-        top = tk.Toplevel(root)
-        top.geometry("200x100")
-        top.title("Password copied")
-        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
-        topClearB = tk.Button(top, text="Clear", command=lambda: [clear_input(), top.destroy()])
-        topClearB.pack(pady=5)
-
-    else:
-        buttonCopy.config(state="disabled")
-
-
-# Create copy button
-copyImage = tk.PhotoImage(file="copy-image.png")
-buttonCopy = tk.Button(buttonFrame, image=copyImage, command=copy, state="disabled")
-buttonCopy.grid(row=2, column=1, sticky=tk.NSEW)
-
-# TODO: Create function to disable/enable buttons
+# Create function to disable/enable buttons
 def buttonState(*args):
     if entryVar.get() != "":
         buttonCopy.config(state="normal")
