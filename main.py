@@ -126,9 +126,12 @@ def copy():
         entry = pwdEntry.get()
         pc.copy(entry)
         top = tk.Toplevel(root)
-        top.geometry("200x50")
+        top.geometry("200x100")
         top.title("Password copied")
         tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+        topClearB = tk.Button(top, text="Clear", command=lambda: [clear_input(), top.destroy()])
+        topClearB.pack(pady=5)
+
     else:
         buttonCopy.config(state="disabled")
 
