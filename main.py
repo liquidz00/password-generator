@@ -18,12 +18,10 @@ root.grid_columnconfigure(0, weight=1)
 
 # pwdLabelFrame
 pwdLabelFrame = tk.LabelFrame(root, text="Choose a password length:", bd=1)
-# pwdLabelFrame.pack(pady=10, padx=15, fill="x")
 pwdLabelFrame.grid(row=0, column=0, pady=10, padx=15, sticky=tk.NSEW)
 
 # middleFrame
 middleFrame = tk.Frame(root, relief="flat")
-# middleFrame.pack(pady=10, padx=15, fill="x")
 middleFrame.grid(row=1, column=0, pady=10, padx=15, sticky=tk.NSEW)
 
 # buttonFrame
@@ -31,57 +29,60 @@ buttonFrame = tk.Frame(root)
 # buttonFrame.pack(pady=10, padx=15, fill="x")
 
 
-# ** Create widgets for top frame **
+# ** TOP FRAME WIDGETS **
 chVar12 = tk.IntVar()
 check12 = tk.Checkbutton(pwdLabelFrame, text="12", variable=chVar12)
-check12.grid(row=0, column=0, padx=10, sticky=tk.W)
+check12.grid(row=0, column=0, pady=10, padx=15, sticky=tk.W)
 
 chVar16 = tk.IntVar()
 check16 = tk.Checkbutton(pwdLabelFrame, text="16", variable=chVar16)
-check16.grid(row=0, column=1, padx=10, sticky=tk.W)
+check16.grid(row=0, column=1, pady=10, padx=15, sticky=tk.W)
 
-# ** Create widgets for middleFrame **
+
+# ** MIDDLE FRAME WIDGETS **
 entryVar = tk.StringVar()
 pwdEntry = tk.Entry(
-    middleFrame, font=("Menlo", 12), justify="left", textvariable=entryVar
+    middleFrame, font=("Menlo", 12), justify="left", textvariable=entryVar, width=40
 )
 pwdEntry.grid(row=0, column=0, sticky=tk.W)
+
+# Copy function
+def copy():
+    # Get input of entry box which is displaying password
+    if pwdEntry.get() != "":
+        entry = pwdEntry.get()
+        pc.copy(entry)
+        top = tk.Toplevel(root)
+        top.geometry("200x100")
+        top.title("Password copied")
+        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+        topClearB = tk.Button(
+            top, text="Clear", command=lambda: [clear_input(), top.destroy()]
+        )
+        topClearB.pack(pady=5)
+
+    else:
+        buttonCopy.config(state="disabled")
+
+
+# Create copy button
+copyImage = tk.PhotoImage(file="copy-30.png")
+buttonCopy = tk.Button(
+    middleFrame,
+    image=copyImage,
+    command=copy,
+    state="disabled",
+    width=20,
+    height=20,
+)
+buttonCopy.grid(row=0, column=1, sticky=tk.W)
 
 # Create error label
 errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bold", 10))
 errorLabel.grid(row=1, column=0, sticky=tk.W)
 
-# Copy function
-# def copy():
-#     # Get input of entry box which is displaying password
-#     if pwdEntry.get() != "":
-#         entry = pwdEntry.get()
-#         pc.copy(entry)
-#         top = tk.Toplevel(root)
-#         top.geometry("200x100")
-#         top.title("Password copied")
-#         tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
-#         topClearB = tk.Button(
-#             top, text="Clear", command=lambda: [clear_input(), top.destroy()]
-#         )
-#         topClearB.pack(pady=5)
 
-#     else:
-#         buttonCopy.config(state="disabled")
-
-
-# # Create copy button
-# copyImage = tk.PhotoImage(file="copy-30.png")
-# buttonCopy = tk.Button(
-#     middleFrame,
-#     image=copyImage,
-#     command=copy(),
-#     state="disabled",
-# )
-# buttonCopy.grid(row=0, column=0)
-
-
-# ** Create widgets for bottom frame **
+# ** BOTTOM FRAME WIDGETS **
 
 # Define button function clear_input()
 def clear_input():
