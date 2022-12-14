@@ -3,7 +3,7 @@ __pycache__
 _functions.py
 test_gui.py
 old_gui.py
-setup.py
+
 build/
 dist/
 
