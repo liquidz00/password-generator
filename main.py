@@ -57,15 +57,6 @@ def copy():
         pc.copy(entry)
         errorLabel.config(text="Password copied!", fg="Green")
         buttonCopy.config(image=None, text="✔️")
-        # top = tk.Toplevel(root)
-        # top.geometry("200x100")
-        # top.title("Password copied")
-        # tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
-        # topClearB = tk.Button(
-        #     top, text="Clear", command=lambda: [clear_input(), top.destroy()]
-        # )
-        # topClearB.pack(pady=5)
-
     else:
         buttonCopy.config(state="disabled")
 
