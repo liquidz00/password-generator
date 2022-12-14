@@ -26,7 +26,10 @@ middleFrame.grid(row=1, column=0, pady=10, padx=15, sticky=tk.NSEW)
 
 # buttonFrame
 buttonFrame = tk.Frame(root)
-# buttonFrame.pack(pady=10, padx=15, fill="x")
+buttonFrame.grid(row=2, column=0, pady=10, padx=15, sticky=tk.NSEW)
+
+# buttonFrame grid customization
+buttonFrame.grid_columnconfigure(1, weight=2)
 
 
 # ** TOP FRAME WIDGETS **
@@ -52,14 +55,16 @@ def copy():
     if pwdEntry.get() != "":
         entry = pwdEntry.get()
         pc.copy(entry)
-        top = tk.Toplevel(root)
-        top.geometry("200x100")
-        top.title("Password copied")
-        tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
-        topClearB = tk.Button(
-            top, text="Clear", command=lambda: [clear_input(), top.destroy()]
-        )
-        topClearB.pack(pady=5)
+        errorLabel.config(text="Password copied!", fg="Green")
+        buttonCopy.config(image=None, text="✔️")
+        # top = tk.Toplevel(root)
+        # top.geometry("200x100")
+        # top.title("Password copied")
+        # tk.Label(top, text="Password copied!").pack(padx=5, pady=5)
+        # topClearB = tk.Button(
+        #     top, text="Clear", command=lambda: [clear_input(), top.destroy()]
+        # )
+        # topClearB.pack(pady=5)
 
     else:
         buttonCopy.config(state="disabled")
@@ -78,7 +83,7 @@ buttonCopy = tk.Button(
 buttonCopy.grid(row=0, column=1, sticky=tk.W)
 
 # Create error label
-errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bold", 10))
+errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bold", 12))
 errorLabel.grid(row=1, column=0, sticky=tk.W)
 
 
@@ -95,7 +100,7 @@ def clear_input():
 
 # Create clear button
 buttonClear = tk.Button(buttonFrame, text="Clear", command=clear_input)
-buttonClear.grid(row=2, column=1, sticky=tk.EW)
+buttonClear.grid(row=0, column=3, sticky=tk.W)
 
 # Define exit function
 def exit():
@@ -104,7 +109,7 @@ def exit():
 
 # Create exit button
 buttonExit = tk.Button(buttonFrame, text="Exit", command=exit)
-buttonExit.grid(row=2, column=0, sticky=tk.EW)
+buttonExit.grid(row=0, column=4, sticky=tk.W)
 
 # Create generate function
 def generate_password():
@@ -125,9 +130,9 @@ def generate_password():
     pwd_length = 0
 
     if check_fields() == True:
-        errorLabel.config(text="Select a password length.")
+        errorLabel.config(text="Select a password length.", fg="Red")
     elif check_fields() == None:
-        errorLabel.config(text="Error: both lengths selected.")
+        errorLabel.config(text="Error: both lengths selected.", fg="Red")
     elif chVar12.get() == 1:
         pwd_length = 12
         errorLabel.config(text="")
@@ -150,9 +155,12 @@ def generate_password():
 
 # Create generate button
 buttonGenerate = tk.Button(
-    buttonFrame, text="Generate", command=generate_password, width=15
+    buttonFrame,
+    text="Generate",
+    command=generate_password,
+    width=15,
 )
-buttonGenerate.grid(row=2, column=2, columnspan=2, sticky=tk.E)
+buttonGenerate.grid(row=0, column=0, sticky=tk.E)
 
 # ** Additional Functions **
 
