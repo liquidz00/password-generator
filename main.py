@@ -74,7 +74,7 @@ buttonCopy = tk.Button(
 buttonCopy.grid(row=0, column=1, sticky=tk.W)
 
 # Create error label
-errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica-Bold", 12))
+errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica", 12))
 errorLabel.grid(row=1, column=0, sticky=tk.W)
 
 
