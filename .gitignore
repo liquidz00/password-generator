@@ -4,6 +4,6 @@ _functions.py
 test_gui.py
 old_gui.py
 
-build/
-dist/
+## build/
+## dist/
 
