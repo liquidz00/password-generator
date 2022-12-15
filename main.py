@@ -57,7 +57,6 @@ def copy():
         entry = pwdEntry.get()
         pc.copy(entry)
         errorLabel.config(text="Password copied!", fg="Green")
-        buttonCopy.config(image=None, text="✔️")
     else:
         buttonCopy.config(state="disabled")
 
