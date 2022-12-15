@@ -4,6 +4,7 @@ import string
 import secrets
 import random
 import pyperclip as pc
+import os
 
 # Set up Application GUI
 root = tk.Tk()
@@ -62,7 +63,8 @@ def copy():
 
 
 # Create copy button
-file = "/Users/aspeciale/GitHub/password-generator/copy-30.png"
+base_dir = os.path.dir_name(__file__)
+file = os.path.join(base_dir, "./copy-30.png")
 copyImage = tk.PhotoImage(file=file)
 buttonCopy = tk.Button(
     middleFrame,
