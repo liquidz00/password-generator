@@ -5,6 +5,7 @@ DATA_FILES = ["app-icon.icns", "copy-30.png"]
 OPTIONS = {
     "argv_emulation": True,
     "iconfile": "app-icon.icns",
+    "packages": ["tkinter", "pyperclip"],
 }
 
 setup(
