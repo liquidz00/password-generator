@@ -155,7 +155,7 @@ buttonGenerate = tk.Button(
     width=10,
     font="Helvetica",
 )
-buttonGenerate.grid(row=0, column=0, sticky=tk.E)
+buttonGenerate.grid(row=0, column=0, sticky=tk.W)
 
 # ** Additional Functions **
 
