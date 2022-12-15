@@ -63,7 +63,7 @@ def copy():
 
 
 # Create copy button
-base_dir = os.path.dir_name(__file__)
+base_dir = os.path.dirname(__file__)
 file = os.path.join(base_dir, "./copy-30.png")
 copyImage = tk.PhotoImage(file=file)
 buttonCopy = tk.Button(
