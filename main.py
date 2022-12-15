@@ -153,7 +153,6 @@ buttonGenerate = tk.Button(
     text="Generate",
     command=generate_password,
     width=10,
-    font="Helvetica",
 )
 buttonGenerate.grid(row=0, column=0, sticky=tk.W)
 
