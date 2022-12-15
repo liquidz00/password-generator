@@ -7,6 +7,7 @@ OPTIONS = {
     "iconfile": "app-icon.icns",
     "packages": ["tkinter", "pyperclip", "string", "secrets", "random", "os"],
     "includes": ["tkinter", "pyperclip", "string", "secrets", "random", "os"],
+    "windowed": True,
     "plist": {
         "CFBundleName": "Password Generator",
         "CFBundleDisplayName": "Password Generator",
