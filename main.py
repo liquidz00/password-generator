@@ -62,7 +62,8 @@ def copy():
 
 
 # Create copy button
-copyImage = tk.PhotoImage(file="copy-30.png")
+file = "/Users/aspeciale/GitHub/password-generator/copy-30.png"
+copyImage = tk.PhotoImage(file=file)
 buttonCopy = tk.Button(
     middleFrame,
     image=copyImage,
@@ -149,8 +150,8 @@ buttonGenerate = tk.Button(
     buttonFrame,
     text="Generate",
     command=generate_password,
-    width=15,
-    font="Helvetica-Bold",
+    width=10,
+    font="Helvetica",
 )
 buttonGenerate.grid(row=0, column=0, sticky=tk.E)
 
