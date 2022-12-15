@@ -8,7 +8,7 @@ OPTIONS = {
     "iconfile": "app-icon.icns",
     "plist": {
         "CFBundleDevelopmentRegion": "English",
-        "CFBundleIdentifier": "com.speciale.xxx",
+        "CFBundleIdentifier": "com.c0bras.xxx",
         "CFBundleVersion": "1.0.0",
     },
 }
