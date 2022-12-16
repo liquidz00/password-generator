@@ -46,7 +46,11 @@ check16.grid(row=0, column=1, pady=10, padx=15, sticky=tk.W)
 # ** MIDDLE FRAME WIDGETS **
 entryVar = tk.StringVar()
 pwdEntry = tk.Entry(
-    middleFrame, font=("Menlo", 12), justify="left", textvariable=entryVar, width=40
+    middleFrame,
+    font=("Menlo", 12),
+    justify="left",
+    textvariable=entryVar,
+    width=40,  # width=30 for PC
 )
 pwdEntry.grid(row=0, column=0, sticky=tk.W)
 
@@ -70,13 +74,16 @@ buttonCopy = tk.Button(
     image=copyImage,
     command=copy,
     state="disabled",
-    width=20,
-    height=20,
 )
 buttonCopy.grid(row=0, column=1, sticky=tk.W)
 
 # Create error label
-errorLabel = tk.Label(middleFrame, text="", justify="left", font=("Helvetica", 12))
+errorLabel = tk.Label(
+    middleFrame,
+    text="",
+    justify="left",
+    # font=("Helvetica", 12),
+)
 errorLabel.grid(row=1, column=0, sticky=tk.W)
 
 
