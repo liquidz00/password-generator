@@ -6,7 +6,7 @@ old_gui.py
 build/
 dist/
 setup.py
-beta.py
-themes/
+# beta.py 
+# themes/
 
 
